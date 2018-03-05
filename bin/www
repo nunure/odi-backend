@@ -4,8 +4,10 @@
  * Module dependencies.
  */
 const winston = require('winston');
+const mongoose = require('mongoose');
 
 const app = require('../app');
+const configMongodb = require('../routes/config/mongodb');
 const debug = require('debug')('odi-backend:server');
 const http = require('http');
 
@@ -29,10 +31,21 @@ function normalizePort(val) {
 }
 
 /**
+ * Connecrtion to mongoDB
+ */
+function connect() {
+  mongoose.Promise = global.Promise;
+  mongoose.connect(configMongodb.url);
+  return mongoose.connection;
+}
+
+/**
  * Get port from environment and store in Express.
  */
 const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
+
+const host = '0.0.0.0';
 
 /**
  * Create HTTP server.
@@ -84,3 +97,22 @@ server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
 
+/**
+ * Connection
+ */
+connect()
+  .on('error', (error) => {
+    winston.error(`Unable to establish connection to ${configMongodb.url}`, error);
+    process.exit(10);
+  })
+  .on('disconnected', connect)
+  .once('open', () => {
+    winston.info(`Connection to ${configMongodb.url} established`);
+    app.listen(port, host, (error) => {
+      if (error) {
+        winston.error(`Unable to listen for connections on http://${host}:${port}`, error);
+        process.exit(10);
+      }
+      winston.info(`Listening for connections on http://${host}:${port}`);
+    });
+  });
