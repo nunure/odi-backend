@@ -1,36 +1,23 @@
 const express = require('express');
-const path = require('path');
-const logger = require('morgan');
-const bodyParser = require('body-parser');
+const winston = require('winston');
 
+const configExpress = require('./routes/config/express');
 const index = require('./routes/index');
 const users = require('./routes/users');
 
+winston.cli();
+winston.info('Server process starting');
+
 const app = express();
 
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+const errorHandler = require('./routes/middleware/error-handler');
+const notFound = require('./routes/middleware/not-found');
 
+// Pourquoi on ne met pas tous dans la config ?
+configExpress(app);
 app.use('/', index);
 app.use('/users', users);
-
-// catch 404 and forward to error handler
-app.use((req, res, next) => {
-  const err = new Error('Not Found');
-  err.status = 404;
-  next(err);
-});
-
-// error handler
-app.use((err, req, res, next) => {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
-});
+app.use(errorHandler());
+app.use(notFound());
 
 module.exports = app;
