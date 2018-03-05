@@ -1,5 +1,5 @@
 const express = require('express');
-
+const winston = require('winston');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 
@@ -7,6 +7,9 @@ const index = require('./routes/index');
 const users = require('./routes/users');
 
 const app = express();
+
+winston.cli();
+winston.info('Server process starting');
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
