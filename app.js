@@ -1,23 +1,20 @@
 const express = require('express');
 const winston = require('winston');
-const logger = require('morgan');
-const bodyParser = require('body-parser');
 
+const configExpress = require('./routes/config/express');
 const index = require('./routes/index');
 const users = require('./routes/users');
-
-const app = express();
 
 winston.cli();
 winston.info('Server process starting');
 
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+const app = express();
 
 const errorHandler = require('./routes/middleware/error-handler');
 const notFound = require('./routes/middleware/not-found');
 
+// Pourquoi on ne met pas tous dans la config ?
+configExpress(app);
 app.use('/', index);
 app.use('/users', users);
 app.use(errorHandler());
