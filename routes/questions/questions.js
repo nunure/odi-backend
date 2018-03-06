@@ -1,8 +1,6 @@
 const mongoose = require('mongoose');
 
-const { Schema } = mongoose;
-
-const QuestionsSchema = new Schema({
+const QuestionsSchema = new mongoose.Schema({
   title: String,
   answers: [String],
 });

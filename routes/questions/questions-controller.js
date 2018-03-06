@@ -10,6 +10,16 @@ async function find(req, res, next) {
   }
 }
 
+async function findById(req, res, next) {
+  const { questions } = req.params;
+  try {
+    return res.json(questions);
+  } catch (error) {
+    return next(error);
+  }
+}
+
 module.exports = {
   find,
+  findById,
 };
