@@ -31,11 +31,14 @@ function normalizePort(val) {
 }
 
 /**
- * Connecrtion to mongoDB
+ * Connection to mongoDB
  */
 function connect() {
+  const options = {
+    promiseLibrary: global.Promise,
+  };
   mongoose.Promise = global.Promise;
-  mongoose.connect(configMongodb.url);
+  mongoose.connect(configMongodb.url, options);
   return mongoose.connection;
 }
 
