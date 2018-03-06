@@ -4,6 +4,7 @@ const winston = require('winston');
 const configExpress = require('./routes/config/express');
 const index = require('./routes/index');
 const users = require('./routes/users');
+const home = require('./routes/home/');
 const questions = require('./routes/questions/');
 
 winston.cli();
@@ -18,6 +19,7 @@ const notFound = require('./routes/middleware/not-found');
 configExpress(app);
 app.use('/', index);
 app.use('/users', users);
+app.use('/home', home.router);
 app.use('/questions', questions.router);
 app.use(errorHandler());
 app.use(notFound());
