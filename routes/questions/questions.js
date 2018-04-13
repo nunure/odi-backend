@@ -7,11 +7,13 @@ const QuestionsSchema = new mongoose.Schema({
       {
         inputType: String,
         label: String,
-        maxLength: Number,
+        min: Number,
+        max: Number,
         model: String,
         placeholder: String,
         required: Boolean,
         type: { type: String, default: undefined },
+        validator: [String],
         values: [
           {
             name: String,
