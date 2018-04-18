@@ -10,6 +10,7 @@ const app = express();
 
 const home = require('./routes/home/');
 const questions = require('./routes/questions/');
+const answers = require('./routes/answers/');
 const errorHandler = require('./routes/middleware/error-handler');
 const notFound = require('./routes/middleware/not-found');
 
@@ -17,6 +18,7 @@ const notFound = require('./routes/middleware/not-found');
 configExpress(app);
 app.use('/home', home.router);
 app.use('/questions', questions.router);
+app.use('/answers', answers.router);
 app.use(errorHandler());
 app.use(notFound());
 
