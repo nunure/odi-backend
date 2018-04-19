@@ -7,10 +7,11 @@ const controller = require('./answers-controller');
 const router = new Router();
 
 router.route('/')
-  .get(controller.find);
+  .get(controller.find)
+  .put(controller.create);
 
-router.route('/create')
-  .get(controller.create);
+router.route('/createEmpty')
+  .get(controller.createEmpty);
 
 router.route('/:id')
   .get(controller.findById);

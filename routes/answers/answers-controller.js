@@ -15,12 +15,27 @@ async function load(req, res, next, id) {
   }
 }
 
-async function create(req, res, next) {
+async function createEmpty(req, res, next) {
   try {
     return res.json(new Answers());
   } catch (error) {
     return next(error);
   }
+}
+
+async function create(req, res, next) {
+  const answer = new Answers(req.body);
+  try {
+    await answer.validateSync();
+  } catch (error) {
+    return next({ status: 422, message: error.message });
+  }
+  try {
+    await answer.save();
+  } catch (error) {
+    return next(error);
+  }
+  return res.sendStatus(204);
 }
 
 async function find(req, res, next) {
@@ -44,5 +59,6 @@ module.exports = {
   find,
   findById,
   load,
+  createEmpty,
   create,
 };
