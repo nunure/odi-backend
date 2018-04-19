@@ -1,18 +1,18 @@
 const express = require('express');
 const winston = require('winston');
 
-const configExpress = require('./routes/config/express');
+const configExpress = require('./src/config/express');
 
 winston.cli();
 winston.info('Server process starting');
 
 const app = express();
 
-const home = require('./routes/home/');
-const questions = require('./routes/questions/');
-const answers = require('./routes/answers/');
-const errorHandler = require('./routes/middleware/error-handler');
-const notFound = require('./routes/middleware/not-found');
+const home = require('./src/routes/home/');
+const questions = require('./src/routes/questions/');
+const answers = require('./src/routes/answers/');
+const errorHandler = require('./src/middleware/error-handler');
+const notFound = require('./src/middleware/not-found');
 
 // Déclaration des routes
 configExpress(app);

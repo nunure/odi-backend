@@ -1,7 +1,7 @@
 require('./answers');
 const { Router } = require('express');
 
-const validateId = require('../middleware/validate-id');
+const validateId = require('../../middleware/validate-id');
 const controller = require('./answers-controller');
 
 const router = new Router();

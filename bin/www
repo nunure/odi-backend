@@ -7,7 +7,7 @@ const winston = require('winston');
 const mongoose = require('mongoose');
 
 const app = require('../app');
-const configMongodb = require('../routes/config/mongodb');
+const configMongodb = require('../src/config/mongodb');
 const debug = require('debug')('odi-backend:server');
 const http = require('http');
 
