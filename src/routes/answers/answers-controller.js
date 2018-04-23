@@ -33,7 +33,7 @@ async function create(req, res, next) {
     return next({ status: 422, message: error.message });
   }
   try {
-    await odiCompute(answer);
+    await odiCompute.genDoc(answer);
   } catch (error) {
     return next({ status: 424, message: error.message });
   }
