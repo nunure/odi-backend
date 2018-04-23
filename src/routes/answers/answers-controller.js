@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 
+const odiCompute = require('../../functions/odi-compute');
+
 const Answers = mongoose.model('Answers');
 
 async function load(req, res, next, id) {
@@ -31,10 +33,16 @@ async function create(req, res, next) {
     return next({ status: 422, message: error.message });
   }
   try {
+    await odiCompute(answer);
+  } catch (error) {
+    return next({ status: 424, message: error.message });
+  }
+  /* Implement later when we will want to save data un db
+  try {
     await answer.save();
   } catch (error) {
     return next(error);
-  }
+  } */
   return res.sendStatus(204);
 }
 
