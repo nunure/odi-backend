@@ -3,8 +3,15 @@ const mongoose = require("mongoose");
 const AnswersSchema = new mongoose.Schema({
   model: {
     doctor: { type: Number, default: null },
-    test1: { type: String, default: null },
-    test2: { type: String, default: null },
+    first_name: { type: String, default: null },
+    last_name: { type: String, default: null },
+    birth_date: { type: Date, default: null },
+    medical_consultant: { type: String, default: null },
+    job: { type: Number, default: null },
+    activities: { type: String, default: null },
+    size: { type: Number, default: null },
+    weight: { type: Number, default: null },
+    rank: { type: Number, default: null },
     odiQuestion1: { type: Number, default: null },
     odiQuestion2: { type: Number, default: null },
     odiQuestion3: { type: Number, default: null },
