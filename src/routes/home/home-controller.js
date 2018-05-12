@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-const Home = mongoose.model('Home');
+const Home = mongoose.model("Home");
 
 async function find(req, res, next) {
   try {
@@ -11,5 +11,5 @@ async function find(req, res, next) {
 }
 
 module.exports = {
-  find,
+  find
 };

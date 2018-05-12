@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const AnswersSchema = new mongoose.Schema({
   model: {
@@ -14,8 +14,8 @@ const AnswersSchema = new mongoose.Schema({
     odiQuestion7: { type: Number, default: null },
     odiQuestion8: { type: Number, default: null },
     odiQuestion9: { type: Number, default: null },
-    odiQuestion10: { type: Number, default: null },
-  },
+    odiQuestion10: { type: Number, default: null }
+  }
 });
 
-module.exports = mongoose.model('Answers', AnswersSchema);
+module.exports = mongoose.model("Answers", AnswersSchema);

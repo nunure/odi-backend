@@ -5,9 +5,9 @@ module.exports = () => (err, req, res, next) => {
   }
   // render the error page
   const status = err.status || 500;
-  const message = err.message || 'Unexpected error';
+  const message = err.message || "Unexpected error";
   return res.status(status).json({
     status,
-    message,
+    message
   });
 };

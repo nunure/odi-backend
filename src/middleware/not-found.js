@@ -4,6 +4,6 @@ module.exports = () => (req, res) => {
   const message = `Cannot ${req.method} ${req.url}`;
   return res.status(status).json({
     status,
-    message,
+    message
   });
 };

@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-const Questions = mongoose.model('Questions');
+const Questions = mongoose.model("Questions");
 
 async function load(req, res, next, id) {
   try {
@@ -35,5 +35,5 @@ async function findById(req, res, next) {
 module.exports = {
   find,
   findById,
-  load,
+  load
 };

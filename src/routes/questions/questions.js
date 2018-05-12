@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const QuestionsSchema = new mongoose.Schema({
   page: Number,
@@ -14,10 +14,10 @@ const QuestionsSchema = new mongoose.Schema({
         required: Boolean,
         type: { type: String, default: undefined },
         validator: [String],
-        values: [mongoose.Schema.Types.Mixed],
-      },
-    ],
-  },
+        values: [mongoose.Schema.Types.Mixed]
+      }
+    ]
+  }
 });
 
-module.exports = mongoose.model('Questions', QuestionsSchema);
+module.exports = mongoose.model("Questions", QuestionsSchema);

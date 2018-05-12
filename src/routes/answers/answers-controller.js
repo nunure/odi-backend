@@ -1,8 +1,8 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-const odiCompute = require('../../functions/odi-compute');
+const odiCompute = require("../../functions/odi-compute");
 
-const Answers = mongoose.model('Answers');
+const Answers = mongoose.model("Answers");
 
 async function load(req, res, next, id) {
   try {
@@ -68,5 +68,5 @@ module.exports = {
   findById,
   load,
   createEmpty,
-  create,
+  create
 };
