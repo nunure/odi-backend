@@ -14,12 +14,7 @@ const QuestionsSchema = new mongoose.Schema({
         required: Boolean,
         type: { type: String, default: undefined },
         validator: [String],
-        values: [
-          {
-            name: String,
-            value: Number,
-          },
-        ],
+        values: [mongoose.Schema.Types.Mixed],
       },
     ],
   },
