@@ -12,7 +12,7 @@ const QuestionsSchema = new mongoose.Schema({
       values: [
         {
           name: String,
-          value: Number
+          value: String
         }
       ]
     }

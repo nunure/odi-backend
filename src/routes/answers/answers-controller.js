@@ -27,6 +27,8 @@ async function createEmpty(req, res, next) {
 
 async function create(req, res, next) {
   const answer = new Answers(req.body);
+  console.log(req.body);
+  console.log(answer);
   try {
     await answer.validateSync();
   } catch (error) {
