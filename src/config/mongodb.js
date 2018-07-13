@@ -1,12 +1,5 @@
-const port = process.env.MONGODB_PORT || 27017;
-const host = process.env.MONGODB_HOST || "127.0.0.1";
-const user = process.env.MONGODB_USER || "";
-const password = process.env.MONGODB_PASSWORD || "";
-const database = process.env.NODE_ENV || "forms";
-
-module.exports = {
-  url:
-    user && password
-      ? `mongodb://${user}:${password}@${host}:${port}/${database}`
-      : `mongodb://${host}:${port}/${database}`
-};
+if (process.env.NODE_ENV === "production") {
+  module.exports = require("./mongodb.prod");
+} else {
+  module.exports = require("./mongodb.dev");
+}
