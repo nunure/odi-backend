@@ -11,6 +11,7 @@
     "body-parser": "~1.18.2",
     "debug": "~2.6.9",
     "docxtemplater": "^3.6.1",
+    "dotenv": "^6.0.0",
     "express": "~4.15.5",
     "jszip": "^2.6.1",
     "mongoose": "^5.0.8",
