@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www",
-    "dev": "SET DEBUG=express-locallibrary-tutorial:* & npm start",
+    "start": "node ./bin/www",
+    "dev": "SET DEBUG=express-locallibrary-tutorial:* & nodemon ./bin/www",
     "lint": "eslint src"
   },
   "dependencies": {
