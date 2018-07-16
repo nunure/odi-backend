@@ -50,8 +50,8 @@ app.set("port", port);
 
 const host =
   process.env.NODE_ENV === "production"
-    ? "127.0.0.1"
-    : "https://polar-eyrie-97964.herokuapp.com/";
+    ? "https://polar-eyrie-97964.herokuapp.com/"
+    : "127.0.0.1";
 
 /**
  * Create HTTP server.
