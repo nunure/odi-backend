@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const odiCompute = require("../../functions/odi-compute");
-
+const winston = require("@config/winston");
 const Answers = mongoose.model("Answers");
 
 async function load(req, res, next, id) {
@@ -32,11 +32,13 @@ async function create(req, res, next) {
   try {
     await answer.validateSync();
   } catch (error) {
+    winston.error("status 422 :" + error.message);
     return next({ status: 422, message: error.message });
   }
   try {
     await odiCompute.genDoc(answer);
   } catch (error) {
+    winston.error("status 424 :" + error.message);
     return next({ status: 424, message: error.message });
   }
   /* Implement later when we will want to save data un db
