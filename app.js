@@ -1,18 +1,18 @@
+require("module-alias/register");
 const express = require("express");
-const winston = require("winston");
+const winston = require("@config/winston");
 const env = require("dotenv").config();
 
-const configExpress = require("./src/config/express");
+const configExpress = require("@config/express");
 
-winston.cli();
 winston.info("Server process starting");
 
 const app = express();
 
-const questions = require("./src/routes/questions/");
-const answers = require("./src/routes/answers/");
-const errorHandler = require("./src/middleware/error-handler");
-const notFound = require("./src/middleware/not-found");
+const questions = require("@routes/questions/");
+const answers = require("@routes/answers/");
+const errorHandler = require("@middleware/error-handler");
+const notFound = require("@middleware/not-found");
 
 // Déclaration des routes
 configExpress(app);

@@ -12,7 +12,9 @@
     "docxtemplater": "^3.6.1",
     "dotenv": "^6.0.0",
     "express": "~4.16.3",
-    "jszip": "^3.1.5"
+    "jszip": "^3.1.5",
+    "module-alias": "^2.1.0",
+    "mongoose": "^5.3.1"
   },
   "devDependencies": {
     "debug": "~4.0.1",
@@ -26,5 +28,11 @@
     "prettier": "1.14.3",
     "prettier-eslint": "^8.8.1",
     "winston": "^3.1.0"
+  },
+  "_moduleAliases": {
+    "@config": "./src/config",
+    "@routes": "./src/routes",
+    "@middleware": "./src/middleware"
+
   }
 }
