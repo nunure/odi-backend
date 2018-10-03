@@ -1,4 +1,4 @@
-const winston = require("winston");
+const winston = require("@config/winston");
 const JSZip = require("jszip");
 const Docxtemplater = require("docxtemplater");
 
@@ -33,8 +33,8 @@ function compute(answer) {
     }
   });
 */
-  winston.info("odi score :", mark / 10 * 20, "%");
-  return mark / 10 * 20;
+  winston.info("odi score :", (mark / 10) * 20, "%");
+  return (mark / 10) * 20;
 }
 
 function genDoc(answer) {

@@ -3,11 +3,11 @@
 /**
  * Module dependencies.
  */
-const winston = require("winston");
 const mongoose = require("mongoose");
 
 const app = require("../app");
 const configMongodb = require("../src/config/mongodb");
+const winston = require("../src/config/winston");
 const debug = require("debug")("odi-backend:server");
 const http = require("http");
 

@@ -1,5 +1,5 @@
 const morgan = require("morgan");
-const winston = require("winston");
+const winston = require("@config/winston");
 const bodyParser = require("body-parser");
 const logger = require("morgan");
 
@@ -13,9 +13,7 @@ module.exports = app => {
     res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
     next();
   });
-  app.use(
-    morgan("dev", { stream: { write: message => winston.info(message) } })
-  );
+  app.use(morgan("combined", { stream: winston.stream }));
   app.use(bodyParser.json());
   app.use(logger("dev"));
 };
