@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 const QuestionsSchema = new mongoose.Schema({
   page: Number,
+  title: String,
   fields: [
     {
       label: String,
@@ -10,6 +11,12 @@ const QuestionsSchema = new mongoose.Schema({
       required: Boolean,
       type: { type: String, default: undefined },
       values: [
+        {
+          name: String,
+          value: String
+        }
+      ],
+      visibleIf: [
         {
           name: String,
           value: String
