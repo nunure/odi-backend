@@ -38,8 +38,6 @@ function compute(answer) {
 }
 
 function genDoc(answer) {
-  // Load file in function of gender
-  // Load the docx file as a binary
   const content = fs.readFileSync(
     path.resolve("src/assets/data/", "template_homme.docx"),
     "binary"
@@ -54,20 +52,42 @@ function genDoc(answer) {
   // set the templateVariables
   doc.setData({
     doctor: answer.doctor,
+    sex: answer.sex,
     first_name: answer.first_name,
     last_name: answer.last_name,
-    birth_date: getBirthDate(answer.birth_date),
+    birth_date: getDate(answer.birth_date),
     age: getAge(answer.birth_date),
     medical_consultant: answer.medical_consultant,
     job: answer.job, // NULL for unemployed
     activities: answer.activities,
     size: answer.size,
     weight: answer.weight,
-    rank: answer.rank,
-    sex: "M. or Mme",
+    operateBefore: answer.operateBefore,
+    operation_date: getDate(answer.operation_date),
+    operation_cause: answer.operation_cause,
+    long_term_illnesses: answer.long_term_illnesses,
+    allergies: answer.allergies,
+    medication: answer.medication,
+    consult: answer.consult,
+    legsPain: answer.legsPain,
+    backPain: answer.backPain,
+    wakeUpPain: answer.wakeUpPain,
+    moovingPain: answer.moovingPain,
+    painFree: answer.painFree,
+    positionPainFree: answer.positionPainFree,
+    embarrassedWalking: answer.embarrassedWalking,
+    distance: answer.distance,
+    cane: answer.cane,
+    toiletIssue: answer.toiletIssue,
+    treatment: answer.treatment,
+    reeducation: answer.reeducation,
+    infiltration: answer.infiltration,
+    corset: answer.corset,
+    improvment: answer.improvment,
+    rangeLumbarPain: answer.rangeLumbarPain,
+    rangeLegPain: answer.rangeLegPain,
     mark: compute(answer),
-    antecedents: ["rhume"],
-    suffering_time: "X"
+    test: answer
   });
 
   try {
@@ -103,7 +123,7 @@ function getAge(birthDate) {
   return age;
 }
 
-function getBirthDate(date) {
+function getDate(date) {
   return date.getDate() + "-" + date.getMonth() + "-" + date.getFullYear();
 }
 
