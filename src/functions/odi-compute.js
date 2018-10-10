@@ -38,11 +38,22 @@ function compute(answer) {
 }
 
 function genDoc(answer) {
-  const content = fs.readFileSync(
-    path.resolve("src/assets/data/", "template_homme.docx"),
-    "binary"
-  );
+  var content;
 
+  // Load woman template for Mrs
+  if (answer.sex === "mrs") {
+    content = fs.readFileSync(
+      path.resolve("src/assets/data/", "template_homme.docx"),
+      "binary"
+    );
+  }
+  // Load man template for Mr and Other
+  else {
+    content = fs.readFileSync(
+      path.resolve("src/assets/data/", "template_homme.docx"),
+      "binary"
+    );
+  }
   const zip = new JSZip(content);
 
   const doc = new Docxtemplater();
@@ -124,7 +135,9 @@ function getAge(birthDate) {
 }
 
 function getDate(date) {
-  return date.getDate() + "-" + date.getMonth() + "-" + date.getFullYear();
+  if (date != null) {
+    return date.getDate() + "-" + date.getMonth() + "-" + date.getFullYear();
+  } else return null;
 }
 
 module.exports = { compute, genDoc };
