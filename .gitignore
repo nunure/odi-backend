@@ -35,3 +35,5 @@ npm-debug.log
 #Ignore generate docx and word temp files
 output.docx
 ~$*.docx
+
+dist
