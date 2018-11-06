@@ -1,16 +1,19 @@
-const winston = require("@config/winston");
-const JSZip = require("jszip");
-const Docxtemplater = require("docxtemplater");
+import createLogger from '../logger';
 
-const fs = require("fs");
-const path = require("path");
+const JSZip = require('jszip');
+const Docxtemplater = require('docxtemplater');
+
+const fs = require('fs');
+const path = require('path');
+
+const logger = createLogger('odi-compute');
 
 /**
  * This function calcul the odi score of a patient with a mongoose schema in param
  * @param {Answer} answer
  */
 function compute(answer) {
-  const strCompare = "odiQuestion";
+  // const strCompare = 'odiQuestion';
   let mark = 0;
 
   mark += answer.odiQuestion1;
@@ -27,31 +30,48 @@ function compute(answer) {
   // Go through schema where key are equals to odiQuestionXX
   /*
   Object.keys(answer).forEach(key => {
-    winston.info("key :", key, "value :", answer[key]);
+    logger.info("key :", key, "value :", answer[key]);
     if (strCompare.localeCompare(key.substr(0, 11)) === 0) {
       mark += answer[key];
     }
   });
 */
-  winston.info("odi score :", (mark / 10) * 20, "%");
+  // logger.info('odi score :', (mark / 10) * 20, '%');
   return (mark / 10) * 20;
 }
 
+function getAge(birthDate) {
+  if (birthDate != null) {
+    const today = new Date();
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age -= 1;
+    }
+    return age;
+  } return null;
+}
+
+function getDate(date) {
+  if (date != null) {
+    return `${date.getDate()}-${date.getMonth()}-${date.getFullYear()}`;
+  } return null;
+}
+
 function genDoc(answer) {
-  var content;
+  let content;
 
   // Load woman template for Mrs
-  if (answer.sex === "mrs") {
+  if (answer.sex === 'mrs') {
     content = fs.readFileSync(
-      path.resolve("src/assets/data/", "template_homme.docx"),
-      "binary"
+      path.resolve('src/assets/data/', 'template_homme.docx'),
+      'binary',
     );
-  }
   // Load man template for Mr and Other
-  else {
+  } else {
     content = fs.readFileSync(
-      path.resolve("src/assets/data/", "template_homme.docx"),
-      "binary"
+      path.resolve('src/assets/data/', 'template_homme.docx'),
+      'binary',
     );
   }
   const zip = new JSZip(content);
@@ -59,7 +79,7 @@ function genDoc(answer) {
   const doc = new Docxtemplater();
   doc.loadZip(zip);
 
-  console.log(answer);
+  logger.info(answer);
   // set the templateVariables
   doc.setData({
     doctor: answer.doctor,
@@ -98,7 +118,7 @@ function genDoc(answer) {
     rangeLumbarPain: answer.rangeLumbarPain,
     rangeLegPain: answer.rangeLegPain,
     mark: compute(answer),
-    test: answer
+    test: answer,
   });
 
   try {
@@ -109,35 +129,20 @@ function genDoc(answer) {
       message: error.message,
       name: error.name,
       stack: error.stack,
-      properties: error.properties
+      properties: error.properties,
     };
-    winston.error(JSON.stringify({ error: e }));
+    logger.error(JSON.stringify({ error: e }));
     // The error thrown here contains additional information when logged with JSON.stringify
     // (it contains a property object).
     throw error;
   }
 
-  const buf = doc.getZip().generate({ type: "nodebuffer" });
+  const buf = doc.getZip().generate({ type: 'nodebuffer' });
 
   // buf is a nodejs buffer, you can either write it to a file or do anything else with it.
-  var filename = answer.first_name + "_" + answer.last_name + ".docx";
-  fs.writeFileSync(path.resolve("src/assets/data/", filename), buf);
+  const filename = `${answer.first_name}_${answer.last_name}.docx`;
+  fs.writeFileSync(path.resolve('src/assets/data/', filename), buf);
 }
 
-function getAge(birthDate) {
-  var today = new Date();
-  var age = today.getFullYear() - birthDate.getFullYear();
-  var m = today.getMonth() - birthDate.getMonth();
-  if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-    age--;
-  }
-  return age;
-}
-
-function getDate(date) {
-  if (date != null) {
-    return date.getDate() + "-" + date.getMonth() + "-" + date.getFullYear();
-  } else return null;
-}
 
 module.exports = { compute, genDoc };
