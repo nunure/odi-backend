@@ -4,6 +4,9 @@
   "main": "dist",
   "author": "Mathieu RETY <rety.mathieu@gmail.com>",
   "private": true,
+  "engines": {
+    "node": "10.11.0"
+  },
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run -s serve || npm run -s dev",
     "dev": "nodemon -w src --exec \"babel-node src\"",

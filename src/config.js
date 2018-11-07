@@ -8,8 +8,11 @@ export default {
   mongodb: {
     url: `mongodb://${process.env.MONGODB_HOST}:${process.env.MONGODB_PORT}/${process.env.MONGODB_DATABASE}`,
     options: {
-      user: process.env.MONGODB_USER,
-      pass: process.env.MONGODB_PASSWORD,
+      useNewUrlParser: true,
+      auth: {
+        user: process.env.MONGODB_USER,
+        password: process.env.MONGODB_PASSWORD,
+      },
     },
   },
 };
