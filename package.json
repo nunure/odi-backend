@@ -8,11 +8,11 @@
     "node": "10.11.0"
   },
   "scripts": {
-    "start": "if-env NODE_ENV=production && npm run -s serve || npm run -s dev",
+    "start": "npm run -s serve",
     "dev": "nodemon -w src --exec \"babel-node src\"",
     "build": "babel src -s -D -d dist",
     "preserve": "npm run -s build",
-    "serve": "cross-env NODE_ENV=production node dist",
+    "serve": "node dist",
     "lint": "eslint ."
   },
   "dependencies": {
