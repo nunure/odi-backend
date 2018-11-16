@@ -11,7 +11,7 @@
     "start": "npm run -s serve",
     "dev": "nodemon -w src --exec \"babel-node src\"",
     "build": "babel src -s -D -d dist",
-    "postinstall": "npm run -s build",
+    "heroku-postbuild": "npm run -s build",
     "serve": "node dist",
     "lint": "eslint ."
   },

@@ -18,14 +18,19 @@ logger.info('server process starting');
 
 const app = express();
 
-if (process.env.NODE_ENV !== 'production') {
-  // HTTP request logger
+let corsOptions = {};
+
+if (process.env.NODE_ENV !== 'production') { // HTTP request logger
   app.use(morgan('dev'));
   // GZIP compression
   app.use(compression());
-  // Enable CORS
-  app.use(cors());
 }
+// Enable CORS
+corsOptions = {
+  origin: process.env.FRONT_URL,
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+app.use(cors(corsOptions));
 // Add HTTP Headers security
 app.use(helmet());
 // Parse HTTP JSON bodies
